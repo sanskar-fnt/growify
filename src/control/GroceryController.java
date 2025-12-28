@@ -7,7 +7,9 @@ package control;
 import model.GroceryModel;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
+import view.Loginpage;
 
 public class GroceryController {
     private ArrayList<GroceryModel> groceryList = new ArrayList<>();
@@ -46,6 +48,20 @@ public class GroceryController {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Input Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    public void handleLogout(JFrame currentFrame) {
+    // 1. Confirm with the user
+    int response = JOptionPane.showConfirmDialog(currentFrame, 
+            "Are you sure you want to logout?", "Logout", 
+            JOptionPane.YES_NO_OPTION);
+    
+    if (response == JOptionPane.YES_OPTION) {
+        // 2. Close the current Admin Dashboard
+        currentFrame.dispose();
+        
+        // 3. Reopen the Login Page
+        new Loginpage().setVisible(true);
+    }
+}
 
     public void deleteProduct(int selectedRow, DefaultTableModel tableModel) {
         if (selectedRow != -1) {
